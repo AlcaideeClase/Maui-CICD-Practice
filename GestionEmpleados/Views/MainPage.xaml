@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GestionEmpleados.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Gestión de empleados">
+    <VerticalStackLayout>
+        <Grid
+            Margin="8,8,280,8"
+            ColumnDefinitions="*,*,*,*,*"
+            RowDefinitions="*,Auto,*,Auto,*,*">
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Departamentos"
+                TextDecorations="Underline" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="Localizaciones"
+                TextDecorations="Underline" />
+
+            <CollectionView
+                x:Name="CollDepartamentos"
+                Grid.Row="1"
+                Grid.ColumnSpan="5"
+                BackgroundColor="LightGrey"
+                SelectionMode="Single"
+                SelectionChanged="OnDepartamentoSelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0,5" ColumnDefinitions="*,*,*,*,*">
+                            <Label Grid.Column="0" Text="{Binding Nombre}" />
+                            <Label Grid.Column="1" Text="{Binding Localidad}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Apellidos"
+                TextDecorations="Underline" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="Oficios"
+                TextDecorations="Underline" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="2"
+                Text="Salarios"
+                TextDecorations="Underline" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="3"
+                Text="Comisiones"
+                TextDecorations="Underline" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="4"
+                Text="Fecha de Alta"
+                TextDecorations="Underline" />
+
+            <CollectionView
+                x:Name="CollEmpleados"
+                Grid.Row="3"
+                Grid.ColumnSpan="5"
+                BackgroundColor="LightGrey"
+                SelectionMode="Single"
+                SelectionChanged="OnEmpleadoSelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0,5" ColumnDefinitions="*,*,*,*,*">
+                            <Label Grid.Column="0" Text="{Binding Apellidos}" />
+                            <Label Grid.Column="1" Text="{Binding Oficio}" />
+                            <Label Grid.Column="2" Text="{Binding Salario, StringFormat='{0:C}'}" />
+                            <Label Grid.Column="3" Text="{Binding Comision, StringFormat='{0:C}'}" />
+                            <Label Grid.Column="4" Text="{Binding FechaAlta, StringFormat='{0:dd/MM/yyyy}'}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Entry
+                x:Name="EntryApellidos"
+                Grid.Row="4"
+                Grid.Column="0"
+                HorizontalOptions="Fill"
+                Placeholder="Apellidos"
+                PlaceholderColor="DarkGrey"
+                TextColor="Black" />
+            <Entry
+                x:Name="EntryOficio"
+                Grid.Row="4"
+                Grid.Column="1"
+                HorizontalOptions="Fill"
+                Placeholder="Oficio"
+                PlaceholderColor="DarkGrey"
+                TextColor="Black" />
+            <Entry
+                x:Name="EntrySalario"
+                Grid.Row="4"
+                Grid.Column="2"
+                HorizontalOptions="Fill"
+                Placeholder="Salario"
+                PlaceholderColor="DarkGrey"
+                TextColor="Black" />
+            <Entry
+                x:Name="EntryComision"
+                Grid.Row="4"
+                Grid.Column="3"
+                HorizontalOptions="Fill"
+                Placeholder="Comision"
+                PlaceholderColor="DarkGrey"
+                TextColor="Black" />
+            <DatePicker
+                x:Name="DatePickerFechaAlta"
+                Grid.Row="4"
+                Grid.Column="4"
+                HorizontalOptions="Fill"
+                TextColor="Black" />
+
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                Text="Buscar por:"
+                TextDecorations="Underline"
+                VerticalTextAlignment="Center" />
+
+            <CollectionView
+                x:Name="CollFiltros"
+                Grid.Row="5"
+                Grid.Column="1"
+                BackgroundColor="LightGrey"
+                SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Padding="1">
+                            <Label Text="{Binding .}" TextColor="Black" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Entry
+                x:Name="EntryBuscar"
+                Grid.Row="5"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="Fill"
+                Placeholder="Buscar..."
+                PlaceholderColor="DarkGrey"
+                TextColor="Black"
+                VerticalOptions="Center" />
+
+        </Grid>
+        <HorizontalStackLayout
+            Margin="0,10,10,0"
+            HorizontalOptions="End"
+            Spacing="5"
+            VerticalOptions="Center">
+            <Button Clicked="OnBuscarClicked" Text="Buscar" />
+            <Button Clicked="OnGuardarClicked" Text="Guardar" />
+            <Button Clicked="OnActualizarClicked" Text="Actualizar" />
+            <Button Clicked="OnBorrarClicked" Text="Borrar" />
+            <Button Clicked="OnLimpiarClicked" Text="Limpiar" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+
+
+
+</ContentPage>
