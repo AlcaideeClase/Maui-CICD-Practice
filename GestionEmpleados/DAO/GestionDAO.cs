@@ -276,7 +276,7 @@ namespace GestionEmpleados.DAO
                         emp.FechaAlta = DateOnly.Parse(fechaStr);
 
                         // Asignamos el FK manual
-                        emp.IdDepartamento = reader.GetInt32();
+                        emp.IdDepartamento = reader.GetInt32(0);
                         lista.Add(emp);
                     }
                 }
