@@ -25,4 +25,4 @@ jobs:
       run: dotnet workload install maui
 
     - name: 🚀 Compilar y Empaquetar (Publish)
-      run: dotnet publish -c Release
+      run: dotnet publish GestionEmpleados/GestionEmpleados.csproj -c Release -f net9.0-windows10.0.19041.0
