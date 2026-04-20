@@ -26,3 +26,8 @@ jobs:
 
     - name: 🚀 Compilar y Empaquetar (Publish)
       run: dotnet publish GestionEmpleados/GestionEmpleados.csproj -c Release -f net9.0-windows10.0.19041.0
+
+    - name: 🔐 Simular uso de Secretos
+      run: echo "La clave API ha sido inyectada de forma segura."
+      env:
+        CLAVE_SECRETA: ${{ secrets.MI_CLAVE_API }}
