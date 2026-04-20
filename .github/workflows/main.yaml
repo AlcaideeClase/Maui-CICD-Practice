@@ -25,9 +25,24 @@ jobs:
       run: dotnet workload install maui
 
     - name: 🚀 Compilar y Empaquetar (Publish)
-      run: dotnet publish GestionEmpleados/GestionEmpleados.csproj -c Release -f net9.0-windows10.0.19041.0
+      # Le añadimos "-o ./salida" para que guarde el programa compilado en una carpeta fácil de encontrar
+      run: dotnet publish GestionEmpleados/GestionEmpleados.csproj -c Release -f net9.0-windows10.0.19041.0 -o ./salida
 
     - name: 🔐 Simular uso de Secretos
       run: echo "La clave API ha sido inyectada de forma segura."
       env:
         CLAVE_SECRETA: ${{ secrets.MI_CLAVE_API }}
+
+    - name: 🗜️ Comprimir la aplicación
+      run: Compress-Archive -Path ./salida/* -DestinationPath App-v1.0.0.zip
+
+    - name: 📢 Crear Release oficial
+      uses: softprops/action-gh-release@v2
+      with:
+        # Aquí cumplimos el estándar SemVer (MAJOR.MINOR.PATCH)
+        tag_name: v1.0.${{ github.run_number }}
+        name: "Versión 1.0.${{ github.run_number }}"
+        files: App-v1.0.0.zip
+      env:
+        # Usamos un token interno que GitHub nos da gratis para crear la release
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
