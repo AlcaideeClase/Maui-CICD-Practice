@@ -1,0 +1,28 @@
+name: MAUI CI/CD Pipeline
+
+# 1. ¿Cuándo se activa el robot? (Los "Triggers")
+on:
+  push:
+    branches: [ "main" ]
+
+# 2. ¿Qué trabajo va a hacer?
+jobs:
+  build:
+    # 3. ¿En qué ordenador virtual se ejecuta?
+    runs-on: windows-latest
+
+    # 4. Los pasos exactos de la receta
+    steps:
+    - name: 📥 Descargar el código
+      uses: actions/checkout@v4
+
+    - name: ⚙️ Configurar .NET 9
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: 📦 Instalar herramientas de MAUI
+      run: dotnet workload install maui
+
+    - name: 🚀 Compilar y Empaquetar (Publish)
+      run: dotnet publish -c Release
